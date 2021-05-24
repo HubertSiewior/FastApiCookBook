@@ -1,8 +1,7 @@
 import React, {useState} from 'react'
 import API from '../services/api'
-import {Button, Col, Form as BootStrapForm, Row} from 'react-bootstrap';
+import {Button, Col, Form as BootStrapForm} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {Form} from 'react-bootstrap';
 import {useParams} from "react-router-dom";
 import {showErrorPopup} from "../redux/actions";
 import {useDispatch} from "react-redux";
@@ -13,11 +12,11 @@ export const AddRecipeStep = () => {
     const [description, setDescription] = useState('');
     const [time, setTime] = useState('');
     const handleSubmit = (event) => {
-        // API.post(`/recipeStep`, {description: description, time: time, recipeId: id})
-        //     .then()
-        //     .catch(error => {
-        //         dispatch(showErrorPopup(error.response.data))
-        //     })
+        API.post(`recipe/${id}/recipeStep`, {description: description, time: time, recipe_id: id})
+            .then()
+            .catch(error => {
+                dispatch(showErrorPopup(error.response.data))
+            })
     };
     return (
          <BootStrapForm onSubmit={handleSubmit}>
@@ -37,7 +36,7 @@ export const AddRecipeStep = () => {
                         <Button variant="success" className="mr-2" type='submit' block>Add recipe step</Button>
                     </BootStrapForm.Group>
                     <div className="text-center card-footer text-muted">
-                        <a href='/recipestep'> Go back to recipe list</a>
+                        <a href='/recipe'> Go back to recipe list</a>
                     </div>
                 </Col>
             </BootStrapForm.Group>

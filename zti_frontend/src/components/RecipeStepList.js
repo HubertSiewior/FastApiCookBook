@@ -5,11 +5,6 @@ import {Button, Col, Form, ListGroup} from "react-bootstrap";
 import {showErrorPopup} from "../redux/actions";
 import {useDispatch} from "react-redux";
 
-const checkTime=(time)=> {
-    if(time !== 0) return ` Time: ${time}min`;
-    return '';
-};
-
 const RecipeStepItem = (props) => {
     const {id,description, time} = props;
     return <ListGroup.Item variant="primary" action href={`/recipestep/${id}`}>{description}</ListGroup.Item>
@@ -20,7 +15,7 @@ export const RecipeStepList = () => {
     const [recipeSteps, setRecipeSteps] = useState([]);
     const {id} = useParams();
     useEffect(() => {
-        API.get(`/cookbook/recipestep`)
+        API.get(`/recipe/${id}/recipeSteps`)
             .then((response) => {
                 console.log(response);
                 setRecipeSteps(response.data)
@@ -32,7 +27,7 @@ export const RecipeStepList = () => {
     return (
           <Form>
             <Form.Group>
-                <Col md={{span: 6, offset: 3}} sm={{span: 8, offset: 2}}>
+                <Col >
 
                     <h4 className="card-header">Recipe steps list</h4>
                       <ListGroup>

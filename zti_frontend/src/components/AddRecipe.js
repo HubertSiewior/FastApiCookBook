@@ -18,7 +18,7 @@ export const AddRecipe = () => {
     const handleSubmit = (event) => {
         event.preventDefault();
         API.post(`/recipe`, {dish_name: dishName, average_time: averageTime, average_price:averagePrice, difficulty: preparingDifficulty})
-            .then(response => history.push('/recipe'))
+            .then(response => history.push(`/recipe/${response.id}`))
             .catch(error => {
                 dispatch(showErrorPopup(error.response.data))
             })
