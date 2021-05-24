@@ -1,7 +1,7 @@
 .idea/*
 venv/*
-__pycache__/*
-/.idea/*
+*/__pycache__/*
+*.pyc
 /backend/app/refrains/
-/.idea/workspace.xml
 /backend/app/results/
+zti_frontend/node_modules/*
