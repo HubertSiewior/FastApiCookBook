@@ -11,11 +11,10 @@ import {RecipeStepList} from "./components/RecipeStepList";
 import {AddRecipeStep} from "./components/AddRecipeStep";
 import {AddIngredient} from "./components/AddIngredient";
 import {IngredientList} from "./components/IngredientList";
-// import {Form} from './components/Form'
-// import {Recipe} from './components/Recipe'
+import {Recipe} from './components/Recipe'
 import {SignIn} from "./components/SignIn";
 import {SignUp} from "./components/SignUp";
-// import {EditRecipe} from "./components/EditRecipe";
+import {EditRecipe} from "./components/EditRecipe";
 
 export const Routing = () => {
     return (
@@ -57,13 +56,13 @@ export const Routing = () => {
                     <AddIngredient/>
                 </Route>
 
-                {/*<Route path='/recipe/:id'>*/}
-                {/*    <Recipe/>*/}
-                {/*</Route>*/}
+                <Route path='/recipe/:id'>
+                    <Recipe/>
+                </Route>
 
-                {/*<Route path='/editRecipe/:id'>*/}
-                {/*    <EditRecipe/>*/}
-                {/*</Route>*/}
+                <Route path='/editRecipe/:id'>
+                    <EditRecipe/>
+                </Route>
 
                 <Route path = '/about'>
                     <About/>
