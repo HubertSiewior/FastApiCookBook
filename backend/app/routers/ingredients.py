@@ -20,7 +20,7 @@ async def get_all_recipeSteps(recipe_id: int):
 async def get_all_recipesteps():
     return await get_All()
 
-@router.delete('/recipe/{recipe_id}/ingredient')
+@router.delete('/recipe/{recipe_id}/ingredient/delete')
 async def delete(recipe_id: int):
     return await delete_ingredient(recipe_id)
 

@@ -12,7 +12,7 @@ async def create(recipe: RecipeIn_Pydantic):
     return await create_recipe(recipe)
 
 
-@router.get('/recipe/')
+@router.get('/recipe/all')
 async def get_all_recipes():
     return await get_all()
 
@@ -20,6 +20,6 @@ async def get_all_recipes():
 async def get_specific_recipe(recipe_id: int):
     return await get_Recipe(recipe_id)
 
-@router.delete('/recipe/')
+@router.delete('/recipe/{recipe_id}/delete')
 async def delete(recipe_id: int):
     return await delete_recipe(recipe_id)
