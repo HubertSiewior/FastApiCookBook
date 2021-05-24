@@ -40,8 +40,9 @@ export const Recipe = () => {
     }, [id, dispatch]);
 
     const handleDelete = (id) => {
-        recipeSteps.map((item) => API.delete(`/recipeStep/${item.recipe_step_id}`)
-            .then(() => API.delete(`/recipe/${id}`)
+        console.log(recipe)
+        recipeSteps.map((item) => API.delete(`/recipe/recipeStep/${item.recipe_step_id}/delete`)
+            .then(() => API.delete(`/recipe/${id}/delete`)
                 .then(() => history.push('/recipe'))
                 .catch(error => {
                     dispatch(showErrorPopup(error.response.data))
@@ -50,7 +51,7 @@ export const Recipe = () => {
                 dispatch(showErrorPopup(error.response.data))
             }));
 
-        API.delete(`/recipe/${id}`)
+        API.delete(`/recipe/${id}/delete`)
             .then(() => history.push('/recipe'))
             .catch(error => {
                 dispatch(showErrorPopup(error.response.data))
@@ -84,11 +85,11 @@ export const Recipe = () => {
                             <Row>
                                 <Col>
                                     <Button variant="warning" className="mr-2"
-                                            href={`/editRecipe/${recipe.recipe_id}`} block>Edit</Button>
+                                            href={`/editRecipe/${recipe.id}`} block>Edit</Button>
                                 </Col>
                                 <Col>
                                     <Button variant="danger" className="mr-2"
-                                            onClick={() => handleDelete(recipe.recipe_id)} block>Delete</Button>
+                                            onClick={() => handleDelete(recipe[0].id)} block>Delete</Button>
                                 </Col>
                             </Row>
                         </Container>

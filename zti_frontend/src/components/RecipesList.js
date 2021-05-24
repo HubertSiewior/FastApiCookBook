@@ -19,7 +19,7 @@ export const RecipesList = () => {
     }
     const [recipes, setRecipes] = useState([]);
     useEffect(() => {
-        API.get(`/recipe`)
+        API.get(`/recipe/all`)
             .then((response) => {
                 console.log(response);
                 setRecipes(response.data)
