@@ -17,8 +17,7 @@ async def create_recipe(recipe: Recipe_Pydantic):
 async def get_all():
     recipes = await Recipe.all()
     return recipes
-    # Recipe_List = pydantic_queryset_creator(Recipe)
-    # return await Recipe_List.from_queryset(Recipe.all())
+
 
 async def delete_recipe(recipe_id: int):
     recipe_to_delete = await Recipe.filter(id=recipe_id)
@@ -27,3 +26,7 @@ async def delete_recipe(recipe_id: int):
     obj = recipe_to_delete
     await Recipe.filter(id=recipe_id).delete()
     return obj
+
+async def get_Recipe(recipe_id: int):
+    recipe = await Recipe.filter(id = recipe_id)
+    return recipe
