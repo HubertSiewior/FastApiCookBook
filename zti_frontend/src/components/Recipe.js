@@ -5,6 +5,7 @@ import {Button, Col, Container, Form, Row} from "react-bootstrap";
 import {RecipeStepList} from "./RecipeStepList";
 import {useDispatch} from "react-redux";
 import {showErrorPopup} from "../redux/actions";
+import {IngredientList} from "./IngredientList";
 
 export const Recipe = () => {
     const dispatch = useDispatch();
@@ -19,8 +20,7 @@ export const Recipe = () => {
         if (id) {
             API.get(`recipe/${id}`)
                 .then(response => {
-                    console.log(response.data);
-                    setRecipe(response.data)
+                    setRecipe(response.data[0])
                 })
                 .catch(error => {
                     dispatch(showErrorPopup(error.response.data))
@@ -29,7 +29,7 @@ export const Recipe = () => {
     }, [id, dispatch]);
 
     useEffect(() => {
-        API.get(`/recipe/${id}/recipeSteps`)
+        API.get(`/recipe/${id}/recipeStep`)
             .then((response) => {
                 console.log(response);
                 setRecipeSteps(response.data)
@@ -41,7 +41,7 @@ export const Recipe = () => {
 
     const handleDelete = (id) => {
         console.log(recipe)
-        recipeSteps.map((item) => API.delete(`/recipe/recipeStep/${item.recipe_step_id}/delete`)
+        recipeSteps.map((item) => API.delete(`/recipe/recipeStep/${item.id}/delete`)
             .then(() => API.delete(`/recipe/${id}/delete`)
                 .then(() => history.push('/recipe'))
                 .catch(error => {
@@ -62,7 +62,7 @@ export const Recipe = () => {
     return (
         <Form>
             <Form.Group>
-                <Col md={{span: 8, offset: 2}} sm={{span: 8, offset: 2}}>
+                <Col>
                     <h4 className="card-header text-center">{recipe.dish_name}</h4>
                     <Form.Group>
                         <Form.Label>Dish name: {recipe.dish_name}</Form.Label>
@@ -81,6 +81,9 @@ export const Recipe = () => {
                         <RecipeStepList/>
                     </Form.Group>
                     <Form.Group>
+                        <IngredientList/>
+                    </Form.Group>
+                    <Form.Group>
                         <Container>
                             <Row>
                                 <Col>
@@ -89,7 +92,7 @@ export const Recipe = () => {
                                 </Col>
                                 <Col>
                                     <Button variant="danger" className="mr-2"
-                                            onClick={() => handleDelete(recipe[0].id)} block>Delete</Button>
+                                            onClick={() => handleDelete(recipe.id)} block>Delete</Button>
                                 </Col>
                             </Row>
                         </Container>

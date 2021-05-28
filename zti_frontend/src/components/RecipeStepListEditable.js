@@ -55,7 +55,7 @@ export const RecipeStepListEditable = () => {
     const [recipeSteps, setRecipeSteps] = useState([]);
     const {id} = useParams();
     useEffect(() => {
-        API.get(`/recipe/${id}/recipeSteps`)
+        API.get(`/recipe/${id}/recipeStep`)
             .then((response) => {
                 console.log(response);
                 setRecipeSteps(response.data)

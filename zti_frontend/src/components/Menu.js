@@ -7,7 +7,7 @@ export const Menu = () => {
         <div className="Menu">
             <header>
                 <Navbar expand="lg" variant="dark" bg="dark">
-                    <Navbar.Brand href="/home" className="flexSpace"><img src={icon} className="rounded" alt=""/>GoodRecipes</Navbar.Brand>
+                    <Navbar.Brand href="/home" className="flexSpace"><img src={icon} className="rounded" alt=""/>CookBook</Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav"/>
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="mr-auto">

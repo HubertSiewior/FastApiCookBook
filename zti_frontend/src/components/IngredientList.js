@@ -5,7 +5,6 @@ import {Button, Col, Form, ListGroup} from "react-bootstrap";
 import {showErrorPopup} from "../redux/actions";
 import {useDispatch} from "react-redux";
 
-
 const IngredientItem = (props) => {
     const {ingredient_name, price, kcal, quantity, if_vegan} = props;
     return <ListGroup.Item variant="primary">{ingredient_name}</ListGroup.Item>
@@ -16,7 +15,7 @@ export const IngredientList = () => {
     const [ingredients, setIngredients] = useState([]);
     const {id} = useParams();
     useEffect(() => {
-        API.get(`/cookbook/ingredient`)
+        API.get(`/recipe/${id}/ingredient`)
             .then((response) => {
                 console.log(response);
                 setIngredients(response.data)
@@ -28,8 +27,7 @@ export const IngredientList = () => {
     return (
           <Form>
             <Form.Group>
-                <Col md={{span: 6, offset: 3}} sm={{span: 8, offset: 2}}>
-
+                <Col>
                     <h4 className="card-header">Ingredients list</h4>
                       <ListGroup>
                             {ingredients.map((item) => <IngredientItem key={item.ingredient_id}

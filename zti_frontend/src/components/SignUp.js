@@ -17,7 +17,7 @@ export const SignUp = () => {
     const handleSignUp = (event) => {
         event.preventDefault();
         API.post(`/user/create`, {username: username, password_hash: password, email: email})
-            .then(response => history.push('/home'))
+            .then(response => history.push('/signIn'))
             .catch(error => {
                 dispatch(showErrorPopup(error.response.data))
             })

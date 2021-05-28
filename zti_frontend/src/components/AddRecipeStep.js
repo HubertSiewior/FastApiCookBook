@@ -12,6 +12,7 @@ export const AddRecipeStep = () => {
     const [description, setDescription] = useState('');
     const [time, setTime] = useState('');
     const handleSubmit = (event) => {
+        event.preventDefault();
         API.post(`recipe/${id}/recipeStep`, {description: description, time: time, recipe_id: id})
             .then()
             .catch(error => {
@@ -36,7 +37,7 @@ export const AddRecipeStep = () => {
                         <Button variant="success" className="mr-2" type='submit' block>Add recipe step</Button>
                     </BootStrapForm.Group>
                     <div className="text-center card-footer text-muted">
-                        <a href='/recipe'> Go back to recipe list</a>
+                        <a href={`/recipe/${id}`}> Go back to recipe</a>
                     </div>
                 </Col>
             </BootStrapForm.Group>

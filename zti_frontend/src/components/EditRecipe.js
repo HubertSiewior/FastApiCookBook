@@ -6,6 +6,7 @@ import {RecipeStepListEditable} from "./RecipeStepListEditable";
 import {AddRecipeStep} from "./AddRecipeStep";
 import {useDispatch} from "react-redux";
 import {showErrorPopup} from "../redux/actions";
+import {IngredientList} from "./IngredientList";
 
 export const EditRecipe = () => {
     const dispatch = useDispatch();
@@ -19,7 +20,7 @@ export const EditRecipe = () => {
         API.get(`recipe/${id}`)
             .then(response => {
                 console.log(response.data);
-                setRecipe(response.data)
+                setRecipe(response.data[0])
             })
             .catch(error => {
                 dispatch(showErrorPopup(error.response.data))
@@ -28,16 +29,18 @@ export const EditRecipe = () => {
     let [dishName, setDishName] = useState('');
     let [averageTime, setAverageTime] = useState('');
     let [preparingDifficulty, setPreparingDifficulty] = useState('');
+    let [averagePrice, setAveragePrice] = useState('');
 
     const handleEdit = () => {
         if (dishName === '') dishName = recipe.dish_name;
         if (averageTime === '') averageTime = recipe.average_time;
-        if (preparingDifficulty === '') preparingDifficulty = recipe.preparing_difficulty;
+        if (preparingDifficulty === '') preparingDifficulty = recipe.difficulty;
 
         API.put(`/recipe/${id}`, {
-            dishName: dishName,
-            averageTime: averageTime,
-            preparingDifficulty: preparingDifficulty
+            dish_name: dishName,
+            average_time: averageTime,
+            difficulty: preparingDifficulty,
+            average_price: averagePrice
         })
             .then(response => history.push(`/recipe/${id}`))
             .catch(error => {
@@ -61,13 +64,25 @@ export const EditRecipe = () => {
                                       defaultValue={recipe.average_time}/>
                     </Form.Group>
                     <Form.Group>
-                        <Form.Label>Preparing difficulty (1-10):</Form.Label>
+                        <Form.Label>Preparing difficulty:</Form.Label>
                         <Form.Control onChange={event => setPreparingDifficulty(event.target.value)} type="text"
-                                      defaultValue={recipe.preparing_difficulty}/>
+                                      defaultValue={recipe.difficulty}/>
                     </Form.Group>
+
+                    <Form.Group>
+                        <Form.Label>Average price (PLN):</Form.Label>
+                        <Form.Control onChange={event => setAveragePrice(event.target.value)} type="text"
+                                      defaultValue={recipe.average_price}/>
+                    </Form.Group>
+                    
                     <Form.Group>
                         <RecipeStepListEditable/>
                     </Form.Group>
+
+                    <Form.Group>
+                        <IngredientList/>
+                    </Form.Group>
+
                     <AddRecipeStep/>
                     <Button variant="success" type="submit" block>Confirm changes</Button>
 
