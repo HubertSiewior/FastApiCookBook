@@ -14,7 +14,7 @@ const RecipeStepItemEditable = (props) => {
     const [newTime, setNewTime] = useState(time);
 
     const handleDelete = (id) => {
-        API.delete(`/recipeStep/${id}`)
+        API.delete(`/recipe/recipeStep/${id}/delete`)
             .catch(error => {
                 dispatch(showErrorPopup(error.response.data))
             })
@@ -69,7 +69,7 @@ export const RecipeStepListEditable = () => {
             <p>Steps:</p>
             <ListGroup>
                 {recipeSteps.map((item) => <RecipeStepItemEditable key={item.recipe_step_id}
-                                                                   step_id={item.recipe_step_id}
+                                                                   step_id={item.id}
                                                                    id={item.recipe_id}
                                                                    time={item.time}
                                                                    description={item.description}/>)}

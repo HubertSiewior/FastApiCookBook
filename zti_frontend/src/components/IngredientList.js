@@ -6,7 +6,7 @@ import {showErrorPopup} from "../redux/actions";
 import {useDispatch} from "react-redux";
 
 const IngredientItem = (props) => {
-    const {ingredient_name, price, kcal, quantity, if_vegan} = props;
+    const {ingredient_name} = props;
     return <ListGroup.Item variant="primary">{ingredient_name}</ListGroup.Item>
 };
 
@@ -25,21 +25,21 @@ export const IngredientList = () => {
             })
     }, [id, dispatch]);
     return (
-          <Form>
+        <Form>
             <Form.Group>
                 <Col>
                     <h4 className="card-header">Ingredients list</h4>
-                      <ListGroup>
-                            {ingredients.map((item) => <IngredientItem key={item.ingredient_id}
-                                                                       id = {item.recipe_id}
-                                                                       price = {item.price}
-                                                                       kcal = {item.kcal}
-                                                                       quantity = {item.quantity}
-                                                                       ifVegan = {item.ifVegan}/>)}
-                      </ListGroup>
-                    <div className="text-center">
-                        <Button href='/ingredient/new' variant="success" className="mr-2 ">Add new ingredient</Button>
-                    </div>
+                    <ListGroup>
+                        {ingredients.map((item) => <IngredientItem key={item.id}
+                                                                   id={item.recipe_id}
+                                                                   price={item.price}
+                                                                   kcal={item.kcal}
+                                                                   quantity={item.quantity}
+                                                                   ifVegan={item.if_vegan}/>)}
+                    </ListGroup>
+                    {/*<div className="text-center">*/}
+                    {/*    <Button href='/ingredient/new' variant="success" className="mr-2 ">Add new ingredient</Button>*/}
+                    {/*</div>*/}
                 </Col>
             </Form.Group>
         </Form>

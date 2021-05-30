@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import API from '../services/api'
-import {Button, Col, Form as BootStrapForm, Row} from 'react-bootstrap';
+import {Button, Col, Form as BootStrapForm} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {useParams} from "react-router-dom";
 import {showErrorPopup} from "../redux/actions";
@@ -13,7 +13,7 @@ export const AddIngredient = () => {
     const [price, setPrice] = useState('');
     const [kcal, setKcal] = useState('');
     const [quantity, setQuantity] = useState('');
-    const [ifVegan, setIfVegan] = useState(false);
+    const [ifVegan] = useState(false);
     const handleSubmit = (event) => {
         event.preventDefault();
         API.post(`/recipe/${id}/ingredient`, {ingredient_name: ingredientName, price: price, kcal: kcal, quantity: quantity, if_vegan: ifVegan, recipe_id: id})

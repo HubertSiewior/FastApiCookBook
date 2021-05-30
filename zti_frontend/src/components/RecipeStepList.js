@@ -6,7 +6,7 @@ import {showErrorPopup} from "../redux/actions";
 import {useDispatch} from "react-redux";
 
 const RecipeStepItem = (props) => {
-    const {id, description, time} = props;
+    const {description, time} = props;
     return <ListGroup.Item variant="primary">{description} Time:{time}</ListGroup.Item>
 };
 
@@ -35,9 +35,9 @@ export const RecipeStepList = () => {
                                                                    time={item.time}
                                                                    description={item.description}/>)}
                     </ListGroup>
-                    <div className="text-center">
-                        <Button href='/recipestep/new' variant="success" className="mr-2 ">Add new recipe step</Button>
-                    </div>
+                    {/*<div className="text-center">*/}
+                    {/*    <Button href='/recipestep/new' variant="success" className="mr-2 ">Add new recipe step</Button>*/}
+                    {/*</div>*/}
                 </Col>
             </Form.Group>
         </Form>

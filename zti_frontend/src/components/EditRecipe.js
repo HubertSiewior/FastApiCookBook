@@ -74,16 +74,16 @@ export const EditRecipe = () => {
                         <Form.Control onChange={event => setAveragePrice(event.target.value)} type="text"
                                       defaultValue={recipe.average_price}/>
                     </Form.Group>
-                    
+
                     <Form.Group>
                         <RecipeStepListEditable/>
                     </Form.Group>
-
                     <Form.Group>
-                        <IngredientList/>
+                        <AddRecipeStep/>
                     </Form.Group>
 
-                    <AddRecipeStep/>
+
+                    {/*<IngredientList/>*/}
                     <Button variant="success" type="submit" block>Confirm changes</Button>
 
                     <div className="text-center card-footer text-muted">

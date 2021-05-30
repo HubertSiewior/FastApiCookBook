@@ -80,9 +80,11 @@ export const Recipe = () => {
                     <Form.Group>
                         <RecipeStepList/>
                     </Form.Group>
+
                     <Form.Group>
                         <IngredientList/>
                     </Form.Group>
+
                     <Form.Group>
                         <Container>
                             <Row>
