@@ -8,6 +8,7 @@ import {useDispatch} from "react-redux";
 import {showErrorPopup} from "../redux/actions";
 import {IngredientList} from "./IngredientList";
 
+
 export const EditRecipe = () => {
     const dispatch = useDispatch();
     const [recipe, setRecipe] = useState({});

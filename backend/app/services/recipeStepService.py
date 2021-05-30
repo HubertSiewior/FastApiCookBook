@@ -20,6 +20,16 @@ async def get_recipeStep(id: int):
     recipeStep = await RecipeStep.filter(id=id)
     return recipeStep
 
+async def update_recipeStep(id: int, recipeStep: RecipeStepIn_Pydantic):
+    recipeStep = await RecipeStep.filter(id=id).update(
+        **{'description': recipeStep.description, 'time': recipeStep.time}
+    )
+    recipeStep = await RecipeStep.filter(id=id)
+    if recipeStep:
+        return recipeStep
+    else:
+        raise HTTPException(status_code=404, detail="RecipeStep not found")
+
 
 async def get_all():
     recipeSteps = await RecipeStep.all()
@@ -33,6 +43,9 @@ async def get_recipeSteps_forRecipe(recipe_id):
 
 async def delete_recipeStep(recipeStep_id: int):
     recipeStep_to_delete = await RecipeStep.filter(id=recipeStep_id)
-    obj = recipeStep_to_delete
-    await RecipeStep.filter(id=recipeStep_id).delete()
-    return obj
+    if recipeStep_to_delete:
+        obj = recipeStep_to_delete
+        await RecipeStep.filter(id=recipeStep_id).delete()
+        return obj
+    else:
+        raise HTTPException(status_code=404, detail="RecipeStep not found")

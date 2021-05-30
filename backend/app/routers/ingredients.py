@@ -13,7 +13,7 @@ async def create(recipe_id: int ,ingredient: IngredientIn_Pydantic):
 
 
 @router.get('/recipe/{recipe_id}/ingredient')
-async def get_all_recipeSteps(recipe_id: int):
+async def get_recipeSteps(recipe_id: int):
     return await get_Ingredient_forRecipe(recipe_id)
 
 @router.get('/recipe/ingredient/all')

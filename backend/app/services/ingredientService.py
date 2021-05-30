@@ -31,8 +31,8 @@ async def get_All():
 
 
 async def delete_ingredient(recipeStep_id: int):
-    ringredient_to_delete = await Ingredient.filter(id=recipeStep_id)
-    obj = ringredient_to_delete
+    ingredient_to_delete = await Ingredient.filter(id=recipeStep_id)
+    obj = ingredient_to_delete
     await Ingredient.filter(id=recipeStep_id).delete()
     return obj
 

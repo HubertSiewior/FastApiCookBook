@@ -14,7 +14,7 @@ export const AddRecipeStep = () => {
     const handleSubmit = (event) => {
         event.preventDefault();
         API.post(`recipe/${id}/recipeStep`, {description: description, time: time, recipe_id: id})
-            .then()
+            .then( window.location.reload())
             .catch(error => {
                 dispatch(showErrorPopup(error.response.data))
             })

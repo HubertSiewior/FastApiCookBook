@@ -13,9 +13,6 @@ class Recipe(models.Model):
         max_length=10
     )
 
-    # class Meta:
-    #     ordering = ["id"]
-
 
 Recipe_Pydantic = pydantic_model_creator(Recipe, name="Recipe")
 RecipeIn_Pydantic = pydantic_model_creator(Recipe, name="RecipeIn", exclude_readonly=True)

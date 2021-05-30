@@ -4,26 +4,35 @@ import {useParams} from "react-router-dom";
 import {Button, ListGroup, Form, Row, Col} from "react-bootstrap";
 import {useDispatch} from "react-redux";
 import {showErrorPopup} from "../redux/actions";
-
+import {useHistory} from "react-router-dom";
 
 const RecipeStepItemEditable = (props) => {
     const dispatch = useDispatch();
     const {step_id, description, time} = props;
-
+    const history = useHistory();
     const [newDescription, setNewDescription] = useState(description);
     const [newTime, setNewTime] = useState(time);
 
-    const handleDelete = (id) => {
+    const handleDelete = (event, id) => {
+        console.log(id)
+        event.preventDefault()
         API.delete(`/recipe/recipeStep/${id}/delete`)
+            // .then(response => history.push('/editRecipe/${id}'))
+            .then( window.location.reload())
+
             .catch(error => {
                 dispatch(showErrorPopup(error.response.data))
             })
     };
-    const handleEdit = (id) => {
-        API.put(`/recipeStep/${id}`, {
-            description: newDescription,
-            time: newTime
+    const handleEdit = (event, id) => {
+        event.preventDefault()
+        console.log(newDescription + "   " + newTime)
+        API.put(`/recipe/recipeStep/${id}`, {
+            description: newDescription.toString(),
+            time: newTime.toString(),
+            recipe_id: 3
         })
+            .then( window.location.reload())
             .catch(error => {
                 dispatch(showErrorPopup(error.response.data))
             })
@@ -41,10 +50,10 @@ const RecipeStepItemEditable = (props) => {
             </Col>
             <Col>
                 <Button variant="warning" size="sm" block
-                        onClick={() => handleEdit(step_id, description, time)}>Edit</Button> {' '}
+                        onClick={(event) => handleEdit(event, step_id, description, time)}>Edit</Button> {' '}
             </Col>
             <Col>
-                <Button variant="danger" size="sm" block type="submit" onClick={() => handleDelete(step_id)}>Delete</Button>
+                <Button variant="danger" size="sm" block type="submit" onClick={(event) => handleDelete(event, step_id)}>Delete</Button>
             </Col>
         </Row>
     </ListGroup.Item>
