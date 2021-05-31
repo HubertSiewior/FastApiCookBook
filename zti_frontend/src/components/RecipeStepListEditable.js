@@ -17,7 +17,7 @@ const RecipeStepItemEditable = (props) => {
         console.log(id)
         event.preventDefault()
         API.delete(`/recipe/recipeStep/${id}/delete`)
-            // .then(response => history.push('/editRecipe/${id}'))
+            .then(response => history.push(`/editRecipe/${id}`))
             .then( window.location.reload())
 
             .catch(error => {

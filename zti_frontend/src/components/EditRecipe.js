@@ -6,7 +6,6 @@ import {RecipeStepListEditable} from "./RecipeStepListEditable";
 import {AddRecipeStep} from "./AddRecipeStep";
 import {useDispatch} from "react-redux";
 import {showErrorPopup} from "../redux/actions";
-import {IngredientList} from "./IngredientList";
 
 
 export const EditRecipe = () => {
@@ -32,7 +31,8 @@ export const EditRecipe = () => {
     let [preparingDifficulty, setPreparingDifficulty] = useState('');
     let [averagePrice, setAveragePrice] = useState('');
 
-    const handleEdit = () => {
+    const handleEdit = (event) => {
+        event.preventDefault();
         if (dishName === '') dishName = recipe.dish_name;
         if (averageTime === '') averageTime = recipe.average_time;
         if (preparingDifficulty === '') preparingDifficulty = recipe.difficulty;
@@ -40,8 +40,8 @@ export const EditRecipe = () => {
         API.put(`/recipe/${id}`, {
             dish_name: dishName,
             average_time: averageTime,
-            difficulty: preparingDifficulty,
-            average_price: averagePrice
+            average_price: averagePrice,
+            difficulty: preparingDifficulty
         })
             .then(response => history.push(`/recipe/${id}`))
             .catch(error => {
@@ -83,8 +83,8 @@ export const EditRecipe = () => {
                         <AddRecipeStep/>
                     </Form.Group>
 
+{/*todo dodawanie składnika (edycje ewentualnie)*/}
 
-                    {/*<IngredientList/>*/}
                     <Button variant="success" type="submit" block>Confirm changes</Button>
 
                     <div className="text-center card-footer text-muted">

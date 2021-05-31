@@ -14,13 +14,13 @@ export const AddRecipeStep = () => {
     const handleSubmit = (event) => {
         event.preventDefault();
         API.post(`recipe/${id}/recipeStep`, {description: description, time: time, recipe_id: id})
-            .then( window.location.reload())
+            .then(window.location.reload())
             .catch(error => {
                 dispatch(showErrorPopup(error.response.data))
             })
     };
     return (
-         <BootStrapForm>
+        <BootStrapForm>
             <BootStrapForm.Group>
                 <Col md={{span: 6, offset: 3}} sm={{span: 8, offset: 2}}>
                     <h4 className="card-header text-center">New recipe step form</h4>
@@ -34,11 +34,9 @@ export const AddRecipeStep = () => {
                     </BootStrapForm.Group>
 
                     <BootStrapForm.Group>
-                        <Button variant="success" className="mr-2" type='submit' block onClick={handleSubmit}>Add recipe step</Button>
+                        <Button variant="success" className="mr-2" type='submit' block onClick={handleSubmit}>Add recipe
+                            step</Button>
                     </BootStrapForm.Group>
-                    <div className="text-center card-footer text-muted">
-                        <a href={`/recipe/${id}`}> Go back to recipe</a>
-                    </div>
                 </Col>
             </BootStrapForm.Group>
         </BootStrapForm>

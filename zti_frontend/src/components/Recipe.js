@@ -5,6 +5,7 @@ import {Button, Col, Container, Form, Row} from "react-bootstrap";
 import {RecipeStepList} from "./RecipeStepList";
 import {useDispatch} from "react-redux";
 import {showErrorPopup} from "../redux/actions";
+import {IngredientList} from "./IngredientList";
 
 export const Recipe = () => {
     const dispatch = useDispatch();
@@ -29,7 +30,7 @@ export const Recipe = () => {
     }, [id, dispatch]);
 
     useEffect(() => {
-        API.get(`/recipe/${id}/recipeSteps`)
+        API.get(`/recipe/${id}/recipeStep`)
             .then((response) => {
                 console.log(response);
                 setRecipeSteps(response.data)
@@ -41,7 +42,7 @@ export const Recipe = () => {
 
     const handleDelete = (id) => {
         console.log(recipe)
-        recipeSteps.map((item) => API.delete(`/recipe/recipeStep/${item.recipe_step_id}/delete`)
+        recipeSteps.map((item) => API.delete(`/recipe/recipeStep/${item.id}/delete`)
             .then(() => API.delete(`/recipe/${id}/delete`)
                 .then(() => history.push('/recipe'))
                 .catch(error => {
@@ -80,6 +81,11 @@ export const Recipe = () => {
                     <Form.Group>
                         <RecipeStepList/>
                     </Form.Group>
+
+                    <Form.Group>
+                        <IngredientList/>
+                    </Form.Group>
+                    
                     <Form.Group>
                         <Container>
                             <Row>
@@ -89,7 +95,7 @@ export const Recipe = () => {
                                 </Col>
                                 <Col>
                                     <Button variant="danger" className="mr-2"
-                                            onClick={() => handleDelete(recipe[0].id)} block>Delete</Button>
+                                            onClick={() => handleDelete(recipe.id)} block>Delete</Button>
                                 </Col>
                             </Row>
                         </Container>
