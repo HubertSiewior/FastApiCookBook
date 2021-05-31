@@ -6,8 +6,8 @@ import {RecipeStepListEditable} from "./RecipeStepListEditable";
 import {AddRecipeStep} from "./AddRecipeStep";
 import {useDispatch} from "react-redux";
 import {showErrorPopup} from "../redux/actions";
-import {IngredientList} from "./IngredientList";
 import {AddIngredient} from "./AddIngredient";
+import {IngredientListEditable} from "./IngredientListEditable";
 
 
 export const EditRecipe = () => {
@@ -79,37 +79,28 @@ export const EditRecipe = () => {
                                       defaultValue={recipe.average_price}/>
                     </Form.Group>
 
-                    <div style={{display:"flex",width:"100%",flexDirection:'column'}}>
-                          <Form.Group style={{width:"100%"}}>
-                                 <RecipeStepListEditable/>
-                          </Form.Group>
+                    <div style={{display: "flex", width: "100%", flexDirection: 'column'}}>
+                        <Form.Group style={{width: "100%"}}>
+                            <RecipeStepListEditable/>
+                        </Form.Group>
 
-                          <Form.Group style={{width:"100%"}}>
+                        <Form.Group style={{width: "100%"}}>
                             <AddRecipeStep/>
                         </Form.Group>
 
                     </div>
-                    {/*<Form.Group>*/}
-                    {/*    <RecipeStepListEditable/>*/}
-                    {/*</Form.Group>*/}
 
-                    <div style={{display:"flex",width:"100%",flexDirection:'column'}}>
-                        <Form.Group style={{width:"100%"}}>
-                                <IngredientList/>
-                          </Form.Group>
+                    <div style={{display: "flex", width: "100%", flexDirection: 'column'}}>
+                        <Form.Group style={{width: "100%"}}>
+                            <IngredientListEditable/>
+                        </Form.Group>
 
 
-                        <Form.Group style={{width:"100%"}}>
+                        <Form.Group style={{width: "100%"}}>
                             <AddIngredient/>
                         </Form.Group>
                     </div>
 
-
-
-                    {/*<br/><br/>  <br/><br/>  <br/><br/>  <br/><br/>  <br/><br/>  <br/><br/>*/}
-
-
-{/*todo dodawanie składnika (edycje ewentualnie)*/}
 
                     <Button variant="success" type="submit" block>Confirm changes</Button>
 

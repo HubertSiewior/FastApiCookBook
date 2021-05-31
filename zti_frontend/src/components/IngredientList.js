@@ -18,8 +18,6 @@ export const IngredientList = () => {
     useEffect(() => {
         API.get(`/recipe/${recipe_id}/ingredient`)
             .then((response) => {
-                // console.log("skladniki")
-                // console.log(response.data[0]);
                 setIngredients(response.data)
             })
             .catch(error => {
@@ -40,9 +38,6 @@ export const IngredientList = () => {
                                                                    quantity={item.quantity}
                                                                    ifVegan={item.if_vegan}/>)}
                     </ListGroup>
-                    {/*<div className="text-center">*/}
-                    {/*    <Button href='/ingredient/new' variant="success" className="mr-2 ">Add new ingredient</Button>*/}
-                    {/*</div>*/}
                 </Col>
             </Form.Group>
         </Form>

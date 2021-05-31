@@ -17,13 +17,7 @@ export const AddIngredient = () => {
     const [ifVegan, setIfVegan] = useState(false);
     const handleSubmit = (event) => {
         event.preventDefault();
-        // event.stopImmediatePropagation();
-        console.log("tworzenie skladnika")
-        if (ifVegan == 'true') {
-            setIfVegan(true)
-        } else {
-            setIfVegan(false)
-        }
+        setIfVegan(true)
         console.log(ingredientName + " " + price + " " + kcal + "  " + quantity + "  " + ifVegan)
         API.post(`/recipe/${recipe_id}/ingredient`, {ingredient_name: ingredientName, price: price, kcal: kcal, quantity: quantity, if_vegan: true, recipe_id: id})
             .then(window.location.reload() )
@@ -52,18 +46,11 @@ export const AddIngredient = () => {
                         <BootStrapForm.Label>Quantity: </BootStrapForm.Label>
                         <BootStrapForm.Control onChange={event => setQuantity(event.target.value)} type="number"/>
                     </BootStrapForm.Group>
-                    <BootStrapForm.Group>
-                        <BootStrapForm.Label>IfVegan: </BootStrapForm.Label>
-                        <BootStrapForm.Control onChange={event => setIfVegan(event.target.value)} type="text" v/>
-                    </BootStrapForm.Group>
 
                     <BootStrapForm.Group>
                         <Button variant="success" className="mr-2" type='submit' block onClick={handleSubmit}>Add
                             ingredient</Button>
                     </BootStrapForm.Group>
-                    {/*<div className="text-center card-footer text-muted">*/}
-                    {/*    <a href={`/recipe/${id}`}> Go back to recipe</a>*/}
-                    {/*</div>*/}
                 </Col>
             </BootStrapForm.Group>
         </BootStrapForm>
