@@ -14,10 +14,12 @@ export const IngredientList = () => {
     const dispatch = useDispatch();
     const [ingredients, setIngredients] = useState([]);
     const {id} = useParams();
+    const recipe_id = id
     useEffect(() => {
-        API.get(`/recipe/${id}/ingredient`)
+        API.get(`/recipe/${recipe_id}/ingredient`)
             .then((response) => {
-                console.log(response);
+                // console.log("skladniki")
+                // console.log(response.data[0]);
                 setIngredients(response.data)
             })
             .catch(error => {
@@ -31,6 +33,7 @@ export const IngredientList = () => {
                     <h4 className="card-header">Ingredients list</h4>
                     <ListGroup>
                         {ingredients.map((item) => <IngredientItem key={item.id}
+                                                                   ingredient_name = {item.ingredient_name}
                                                                    id={item.recipe_id}
                                                                    price={item.price}
                                                                    kcal={item.kcal}

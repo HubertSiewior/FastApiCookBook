@@ -30,13 +30,25 @@ async def get_All():
     return ingredient
 
 
-async def delete_ingredient(recipeStep_id: int):
-    ingredient_to_delete = await Ingredient.filter(id=recipeStep_id)
+async def delete_ingredient(id: int):
+    ingredient_to_delete = await Ingredient.filter(id=id)
     obj = ingredient_to_delete
-    await Ingredient.filter(id=recipeStep_id).delete()
+    await Ingredient.filter(id=id).delete()
     return obj
 
 
 async def get_ingredient(id: int):
     ingredient = await Ingredient.filter(id=id)
     return ingredient
+
+
+async def update_ingredient(id: int, ingredient: IngredientIn_Pydantic):
+    ingredient = await Ingredient.filter(id=id).update(
+        **{'ingredient_name': ingredient.ingredient_name, 'price': ingredient.price,
+           'kcal': ingredient.kcal, 'quantity': ingredient.quantity,  'if_vegan': ingredient.if_vegan}
+    )
+    ingredient = await Ingredient.filter(id=id)
+    if ingredient:
+        return ingredient
+    else:
+        raise HTTPException(status_code=404, detail="Ingredient not found")

@@ -6,6 +6,8 @@ import {RecipeStepListEditable} from "./RecipeStepListEditable";
 import {AddRecipeStep} from "./AddRecipeStep";
 import {useDispatch} from "react-redux";
 import {showErrorPopup} from "../redux/actions";
+import {IngredientList} from "./IngredientList";
+import {AddIngredient} from "./AddIngredient";
 
 
 export const EditRecipe = () => {
@@ -36,6 +38,7 @@ export const EditRecipe = () => {
         if (dishName === '') dishName = recipe.dish_name;
         if (averageTime === '') averageTime = recipe.average_time;
         if (preparingDifficulty === '') preparingDifficulty = recipe.difficulty;
+        if (averagePrice === '') averagePrice = recipe.price;
 
         API.put(`/recipe/${id}`, {
             dish_name: dishName,
@@ -76,12 +79,35 @@ export const EditRecipe = () => {
                                       defaultValue={recipe.average_price}/>
                     </Form.Group>
 
-                    <Form.Group>
-                        <RecipeStepListEditable/>
-                    </Form.Group>
-                    <Form.Group>
-                        <AddRecipeStep/>
-                    </Form.Group>
+                    <div style={{display:"flex",width:"100%",flexDirection:'column'}}>
+                          <Form.Group style={{width:"100%"}}>
+                                 <RecipeStepListEditable/>
+                          </Form.Group>
+
+                          <Form.Group style={{width:"100%"}}>
+                            <AddRecipeStep/>
+                        </Form.Group>
+
+                    </div>
+                    {/*<Form.Group>*/}
+                    {/*    <RecipeStepListEditable/>*/}
+                    {/*</Form.Group>*/}
+
+                    <div style={{display:"flex",width:"100%",flexDirection:'column'}}>
+                        <Form.Group style={{width:"100%"}}>
+                                <IngredientList/>
+                          </Form.Group>
+
+
+                        <Form.Group style={{width:"100%"}}>
+                            <AddIngredient/>
+                        </Form.Group>
+                    </div>
+
+
+
+                    {/*<br/><br/>  <br/><br/>  <br/><br/>  <br/><br/>  <br/><br/>  <br/><br/>*/}
+
 
 {/*todo dodawanie składnika (edycje ewentualnie)*/}
 
